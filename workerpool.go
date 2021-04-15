@@ -147,7 +147,7 @@ func main() {
 	case "WorkerPool":
 		d := NewDispatcher(MaxWorker)
 		d.Run()
-		http.HandleFunc("/payload", WorkerPayloadHandler)
+		http.HandleFunc("/", WorkerPayloadHandler)
 	default:
 		http.HandleFunc("/", PayloadHandler)
 	}
