@@ -1,4 +1,7 @@
 # Simple Go Worker Pool
+[![Go Reference](https://pkg.go.dev/badge/github.com/JamesHsu333/WorkerPool.svg)](https://pkg.go.dev/github.com/JamesHsu333/WorkerPool)
+[![Go Report Card](https://goreportcard.com/badge/github.com/JamesHsu333/WorkerPool)](https://goreportcard.com/report/github.com/JamesHsu333/WorkerPool)
+
 Experiment of Go Worker Pool
 ## Scenario
 Client sends a request, and Server receives the request to process the data
@@ -12,11 +15,11 @@ Client                  Server                   Database
 ## How to start
 ```bash
 # run Default mode
-go run workerpool
+go run workerpool.go
 # run Buffered Channel mode
-go run workerpool -m "BufferedChannel"
+go run workerpool.go -m "BufferedChannel"
 # run Worker Pool mode
-go run workerpool -m "WorkerPool"
+go run workerpool.go -m "WorkerPool"
 
 # test Default mode with 10000 request
 go test -v -count=-1 -run TestPayloadHandler
@@ -203,7 +206,7 @@ func WorkerPayloadHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	d := NewDispatcher(MaxWorker)
 	d.Run()
-	http.HandleFunc("/payload", WorkerPayloadHandler)
+	http.HandleFunc("/", WorkerPayloadHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 ```
